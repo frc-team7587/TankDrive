@@ -7,11 +7,15 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.vision.*;
 
 /**
  * This is a demo program showing the use of the RobotDrive class, specifically
@@ -21,16 +25,24 @@ public class Robot extends TimedRobot {
   private DifferentialDrive m_myRobot;
   private Joystick m_leftStick;
   private Joystick m_rightStick;
-  private SpeedController m_leftMotor;
-  private SpeedController m_rightMotor;
+  private SpeedController m_leftFMotor;
+  private SpeedController m_rightFMotor;
+  private SpeedController m_leftBMotor;
+  private SpeedController m_rightBMotor;
+  private SpeedControllerGroup m_left;
+  private SpeedControllerGroup m_right;
+  private VideoSource usbCamera;
 
   @Override
   public void robotInit() {
 
-    m_leftMotor = new PWMVictorSPX(0);
-    m_rightMotor = new PWMVictorSPX(1);
-
-    m_myRobot = new DifferentialDrive(m_leftMotor, m_rightMotor);
+    m_leftFMotor = new PWMVictorSPX(0); //1
+   // m_leftBMotor = new PWMVictorSPX(13); //1
+    m_rightFMotor = new PWMVictorSPX(1); //0
+   // m_rightBMotor = new PWMVictorSPX(2); //0
+   // m_left = new SpeedControllerGroup(m_leftFMotor,m_leftBMotor);
+    //m_right = new SpeedControllerGroup(m_rightFMotor,m_rightBMotor);
+    m_myRobot = new DifferentialDrive(m_leftFMotor, m_rightFMotor);
     
     m_leftStick = new Joystick(0);
     // m_rightStick = new Joystick(1);
@@ -39,7 +51,12 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     
-    m_myRobot.arcadeDrive(m_leftStick.getY(), m_leftStick.getZ());
-    // m_myRobot.tankDrive(m_leftStick.getY(), m_rightStick.getY());
+
+    //drive(-joy.getY(), -joy.getRawAxis(3));
+
+   //m_myRobot.arcadeDrive(-m_leftStick.getY(), m_leftStick.getZ());
+
+    m_myRobot.tankDrive(m_leftStick.getY(), m_leftStick.getRawAxis(5));
+
   }
 }
