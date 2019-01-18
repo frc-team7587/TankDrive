@@ -24,7 +24,6 @@ import edu.wpi.first.wpilibj.vision.*;
 public class Robot extends TimedRobot {
   private DifferentialDrive m_myRobot;
   private Joystick m_leftStick;
-  private Joystick m_rightStick;
   private SpeedController m_leftFMotor;
   private SpeedController m_rightFMotor;
   private SpeedController m_leftBMotor;
@@ -36,27 +35,26 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-    m_leftFMotor = new PWMVictorSPX(0); //1
-   // m_leftBMotor = new PWMVictorSPX(13); //1
-    m_rightFMotor = new PWMVictorSPX(1); //0
-   // m_rightBMotor = new PWMVictorSPX(2); //0
-   // m_left = new SpeedControllerGroup(m_leftFMotor,m_leftBMotor);
-    //m_right = new SpeedControllerGroup(m_rightFMotor,m_rightBMotor);
-    m_myRobot = new DifferentialDrive(m_leftFMotor, m_rightFMotor);
-    
+    m_leftFMotor = new PWMVictorSPX(0); // port number on the ROBORIO
+    m_leftBMotor = new PWMVictorSPX(0);
+    m_rightFMotor = new PWMVictorSPX(1);
+    m_rightBMotor = new PWMVictorSPX(1);
+    m_left = new SpeedControllerGroup(m_leftFMotor, m_leftBMotor);
+    m_right = new SpeedControllerGroup(m_rightFMotor, m_rightBMotor);
+    m_myRobot = new DifferentialDrive(m_left, m_right);
+
     m_leftStick = new Joystick(0);
     // m_rightStick = new Joystick(1);
   }
 
   @Override
   public void teleopPeriodic() {
-    
 
-    //drive(-joy.getY(), -joy.getRawAxis(3));
+    // drive(-joy.getY(), -joy.getRawAxis(3));
 
-   //m_myRobot.arcadeDrive(-m_leftStick.getY(), m_leftStick.getZ());
+    // m_myRobot.arcadeDrive(-m_leftStick.getY(), m_leftStick.getZ());
 
-    m_myRobot.tankDrive(m_leftStick.getY(), m_leftStick.getRawAxis(5));
+    m_myRobot.tankDrive(-m_leftStick.getY(), -m_leftStick.getRawAxis(5));
 
   }
 }
