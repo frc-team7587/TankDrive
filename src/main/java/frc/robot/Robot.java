@@ -25,8 +25,8 @@ public class Robot extends TimedRobot {
   private DifferentialDrive m_myRobot;
   private Joystick m_leftStick;
   private Joystick m_rightStick;
-  private SpeedController m_leftFMotor;
-  private SpeedController m_rightFMotor;
+  private SpeedController m_leftMotor;
+  private SpeedController m_rightMotor;
   private SpeedController m_leftBMotor;
   private SpeedController m_rightBMotor;
   private SpeedControllerGroup m_left;
@@ -36,16 +36,16 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-    m_leftFMotor = new PWMVictorSPX(0); 
+    m_leftMotor = new PWMVictorSPX(0); 
     // m_leftBMotor = new PWMVictorSPX(0);
-    m_rightFMotor = new PWMVictorSPX(1);
+    m_rightMotor = new PWMVictorSPX(1);
     // m_rightBMotor = new PWMVictorSPX(1);
     
     // m_left = new SpeedControllerGroup(m_leftFMotor,m_leftBMotor);
     // m_right = new SpeedControllerGroup(m_rightFMotor,m_rightBMotor);
     // m_myRobot = new DifferentialDrive(m_left, m_right);
 
-    m_myRobot = new DifferentialDrive(m_leftFMotor, m_rightFMotor);
+    m_myRobot = new DifferentialDrive(m_leftMotor, m_rightMotor);
     
     m_leftStick = new Joystick(0);
     // m_rightStick = new Joystick(1);
