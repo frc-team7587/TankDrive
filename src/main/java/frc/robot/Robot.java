@@ -57,14 +57,15 @@ public class Robot extends TimedRobot {
 
     //drive(-joy.getY(), -joy.getRawAxis(3));
 
-// Joystick Code, 
+// Joystick Code, work in progress
 
-  m_myRobot.arcadeDrive(-0.5 * m_leftStick.getY(), 0.5 * m_leftStick.getTwist());
+  //m_myRobot.arcadeDrive(-0.5 * m_leftStick.getY(), 0.5 * m_leftStick.getTwist());
 
-   m_myRobot.arcadeDrive(m_leftStick.getThrottle() * m_leftStick.getY(), 0.5 *m_leftStick.getTwist());
-System.out.println("Throttle: " + m_leftStick.getThrottle());
+   m_myRobot.arcadeDrive(((-0.5 * m_leftStick.getThrottle()) + 1.5) * -m_leftStick.getY(), 0.5 *m_leftStick.getTwist());
+System.out.println("Throttle: " + ((0.5 * m_leftStick.getThrottle()) + 1.5));
 System.out.println("Y: " + m_leftStick.getY());
 System.out.println("Twist: " + m_leftStick.getTwist());
+System.out.println("Left: " + ((0.5 * m_leftStick.getThrottle()) + 1.5) * m_leftStick.getY());
 
 
 
