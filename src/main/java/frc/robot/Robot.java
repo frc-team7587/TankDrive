@@ -57,10 +57,20 @@ public class Robot extends TimedRobot {
 
     //drive(-joy.getY(), -joy.getRawAxis(3));
 
-   //m_myRobot.arcadeDrive(-m_leftStick.getY(), m_leftStick.getZ());
+// Joystick Code, 
 
+  m_myRobot.arcadeDrive(-0.5 * m_leftStick.getY(), 0.5 * m_leftStick.getTwist());
+
+   m_myRobot.arcadeDrive(m_leftStick.getThrottle() * m_leftStick.getY(), 0.5 *m_leftStick.getTwist());
+System.out.println("Throttle: " + m_leftStick.getThrottle());
+System.out.println("Y: " + m_leftStick.getY());
+System.out.println("Twist: " + m_leftStick.getTwist());
+
+
+
+// Gamepad code, full and half speed
     //m_myRobot.tankDrive(m_leftStick.getY(), m_leftStick.getRawAxis(5));
-    m_myRobot.tankDrive(-m_leftStick.getY(), -m_leftStick.getRawAxis(5));
+    //m_myRobot.tankDrive(-0.5 * m_leftStick.getY(), -0.5 * m_leftStick.getRawAxis(5));
 
   }
 }
