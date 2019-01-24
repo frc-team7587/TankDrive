@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSource;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -31,16 +32,19 @@ public class Robot extends TimedRobot {
   private SpeedController m_rightBMotor;
   private SpeedControllerGroup m_left;
   private SpeedControllerGroup m_right;
-  private VideoSource usbCamera;
+  private CameraServer Camera;
 
   @Override
   public void robotInit() {
 
+    Camera = CameraServer.getInstance();
+    Camera.startAutomaticCapture();
+    
     m_leftMotor = new PWMVictorSPX(0); 
     // m_leftBMotor = new PWMVictorSPX(0);
     m_rightMotor = new PWMVictorSPX(1);
     // m_rightBMotor = new PWMVictorSPX(1);
-    
+
     // m_left = new SpeedControllerGroup(m_leftFMotor,m_leftBMotor);
     // m_right = new SpeedControllerGroup(m_rightFMotor,m_rightBMotor);
     // m_myRobot = new DifferentialDrive(m_left, m_right);
@@ -72,6 +76,6 @@ System.out.println("Left: " + ((0.5 * m_leftStick.getThrottle()) + 1.5) * m_left
 // Gamepad code, full and half speed
     //m_myRobot.tankDrive(m_leftStick.getY(), m_leftStick.getRawAxis(5));
     //m_myRobot.tankDrive(-0.5 * m_leftStick.getY(), -0.5 * m_leftStick.getRawAxis(5));
-
+    //
   }
 }
